@@ -31,9 +31,10 @@ RUN useradd -m -d /home/odoo -U -r -s /bin/bash odoo
 COPY clone_current_branch.sh /usr/local/bin/clone_current_branch.sh
 RUN chmod +x /usr/local/bin/clone_current_branch.sh
 
+# Accept build argument for branch name
+ARG BRANCH_NAME
 # Clone the current branch of your custom Odoo repository
-RUN /usr/local/bin/clone_current_branch.sh
-
+RUN /usr/local/bin/clone_current_branch.sh $BRANCH_NAME
 
 # Set working directory
 WORKDIR /opt/odoo

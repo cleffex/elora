@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Get the current branch name
-BRANCH=$(git symbolic-ref --short HEAD)
+# Get the branch name from the argument
+BRANCH=$1
 
-# Clone the repository with the current branch
+# Clone the repository with the specified branch
 git clone --depth=1 --branch "$BRANCH" https://github.com/cleffex/elora /opt/odoo

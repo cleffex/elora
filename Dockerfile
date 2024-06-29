@@ -27,8 +27,13 @@ RUN pip install --upgrade pip setuptools wheel
 # Create odoo user and group
 RUN useradd -m -d /home/odoo -U -r -s /bin/bash odoo
 
-# Clone your custom Odoo repository
-RUN git clone --depth=1 https://github.com/cleffex/cleffex-crm /opt/odoo
+# Copy the script to the container
+COPY clone_current_branch.sh /usr/local/bin/clone_current_branch.sh
+RUN chmod +x /usr/local/bin/clone_current_branch.sh
+
+# Clone the current branch of your custom Odoo repository
+RUN /usr/local/bin/clone_current_branch.sh
+
 
 # Set working directory
 WORKDIR /opt/odoo

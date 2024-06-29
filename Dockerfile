@@ -27,14 +27,9 @@ RUN pip install --upgrade pip setuptools wheel
 # Create odoo user and group
 RUN useradd -m -d /home/odoo -U -r -s /bin/bash odoo
 
-# Copy the script to the container
-COPY clone_current_branch.sh /usr/local/bin/clone_current_branch.sh
-RUN chmod +x /usr/local/bin/clone_current_branch.sh
+# Clone your custom Odoo repository
+RUN git clone --depth=1 --branch develop https://github.com/cleffex/elora /opt/odoo
 
-# Accept build argument for branch name
-ARG BRANCH_NAME
-# Clone the current branch of your custom Odoo repository
-RUN /usr/local/bin/clone_current_branch.sh $BRANCH_NAME
 
 # Set working directory
 WORKDIR /opt/odoo
